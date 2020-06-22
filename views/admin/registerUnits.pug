@@ -1,0 +1,57 @@
+extends ./layout
+
+block content
+    .row.mt-4
+        .offset-md-2.col-md-6
+            if errorMessage.length > 0
+                .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= errorMessage
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+            if success.length > 0
+                .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= success
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+
+    .row
+        div(style="margin-top:7%")
+            .col-md-12
+                form.form-inline(action="/admin/registerUnit" method="POST")
+                    .d-flex.justify-content-between
+                        div(style="margin-right:15%")
+                            select.custom-select(name='selectCourseForUnit' required)
+                                each val in allCourses
+                                    option(value=`${val.course_name}`  style="width:200px;text-overflow: ellipsis;white-space:pre-wrap;") #{val.course_name}
+                            
+                        div(style="margin-right:5%;")
+                            input.form-control(type="text" placeholder="Enter unit name" name="unit_name" required)  
+                            input(type="hidden", name="_csrf" value=`${csrfToken}`)          
+                        div(style="margin-left:9%")
+                            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Create 
+
+    .row.mt-2
+        if allUnits.length > 0
+            .col-md-12
+                table.table
+                    thead
+                        tr  
+                            th #
+                            th unit_name
+                            th unit_code
+                            th action
+                    tbody
+                        each n,i in allUnits                                 
+                            tr  
+                                td= i+1
+                                td= n.unit_name
+                                td= n.unit_code
+                                td
+                                    form(action="/admin/deleteUnit" method="POST")
+                                        input(type="hidden", name="_csrf" value=`${csrfToken}`)
+                                        input(type="hidden", name="unit_id" value=`${n.id}`)
+                                        button(type="submit").btn.btn-danger.btn-sm delete
+
+    
+
+                                

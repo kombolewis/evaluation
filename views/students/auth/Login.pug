@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .row.mt-4
+      .offset-md-3.col-md-6
+          if errorMessage.length > 0
+              div(role="alert").alert.alert-warning.alert-dismissable.fade.show
+                  = errorMessage
+                  button.close(type="button" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true") &#215;
+          if success.length > 0
+              div(role="alert").alert.alert-success.alert-dismissable.fade.show
+                  = success
+                  button.close(type="button" data-dismiss="alert" aria-label="Close")
+                    span(aria-hidden="true") &#215;
+  .row.mt-4
+    .offset-md-2.col-md-8
+      h2 Login
+      hr
+      form(action="/student/login" method="POST")
+        .form-group
+          label(for="email") Email Address
+          input.form-control(type="email" placeholder="Enter Email" name="email")
+        .form-group
+          label(for="password") Password
+          input.form-control(type="password" placeholder="Enter password" name="password")   
+        input(type="hidden", name="_csrf" value=`${csrfToken}`)
+        button.btn.btn-primary(type="submit") Login

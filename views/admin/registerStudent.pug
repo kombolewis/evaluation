@@ -1,0 +1,61 @@
+extends ./layout
+
+block content
+    .row.mt-4
+        .offset-md-2.col-md-6
+            if errorMessage.length > 0
+                .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= errorMessage
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+            if success.length > 0
+                .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= success
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+
+    .row
+        div(style="margin-top:7%")
+            .col-md-12
+                form.form-inline(action="/admin/registerStudent" method="POST")
+                    .d-flex.justify-content-between
+                        div(style="margin-right:1%")
+                            select.custom-select(name='selectCourseStudent' style="width:200px;text-overflow: ellipsis;white-space:pre-wrap;")
+                                each val in allCourses
+                                    option(value=`${val.course_name}`) #{val.course_name}
+                            
+                        div(style="margin-right:1%;")
+                            input.form-control(type="text" placeholder="Enter Student Name" name="student_name" required)  
+                        div(style="margin-right:1%;")
+                            input.form-control(type="email" placeholder="Enter Student Email" name="student_email" required)  
+                        div(style="margin-right:1%;")
+                            input.form-control(type="password" placeholder="Enter Student Password" name="student_password" required)  
+                        div(style="margin-left:1%%")
+                            input(type="hidden", name="_csrf" value=`${csrfToken}`)    
+                            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Create 
+
+    .row.mt-2
+        if allStudents.length > 0
+            .col-md-12
+                table.table
+                    thead
+                        tr  
+                            th #
+                            th name
+                            th email
+                            th action
+                    tbody
+                        each n,i in allStudents                                 
+                            tr  
+                                td= i+1
+                                td= n.name
+                                td= n.email
+                                td
+                                    form(action="/admin/deleteStudent" method="POST")
+                                        input(type="hidden", name="_csrf" value=`${csrfToken}`)
+                                        input(type="hidden", name="student_id" value=`${n.id}`)
+                                        button(type="submit").btn.btn-danger.btn-sm delete
+
+    
+
+                                

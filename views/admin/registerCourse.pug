@@ -1,0 +1,57 @@
+extends ./layout
+
+block content
+    .row.mt-4
+        .offset-md-2.col-md-6
+            if errorMessage.length > 0
+                .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= errorMessage
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+            if success.length > 0
+                .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= success
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+
+    .row
+        div(style="margin-top:7%")
+            .col-md-12
+                form.form-inline(action="/admin/registerCourse" method="POST")
+                    .d-flex.justify-content-between
+                        div(style="margin-right:15%")
+                            select.custom-select(name='selectDepartment' required)
+                                each val in allDepartments
+                                    option(value=`${val.dep_name}`) #{val.dep_name}
+                            
+                        div(style="margin-right:5%;")
+                            input.form-control(type="text" placeholder="Enter Course name" name="course_name" required)  
+                            input(type="hidden", name="_csrf" value=`${csrfToken}`)          
+                        div(style="margin-left:25%")
+                            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Create 
+
+    .row.mt-2
+        if allCourses.length > 0
+            .col-md-12
+                table.table
+                    thead
+                        tr  
+                            th #
+                            th course_name
+                            th course_code
+                            th action
+                    tbody
+                        each n,i in allCourses                                 
+                            tr  
+                                td= i+1
+                                td= n.course_name
+                                td= n.course_code
+                                td
+                                    form(action="/admin/deleteCourse" method="POST")
+                                        input(type="hidden", name="_csrf" value=`${csrfToken}`)
+                                        input(type="hidden", name="course_id" value=`${n.id}`)
+                                        button(type="submit").btn.btn-danger.btn-sm delete
+
+    
+
+                                

@@ -1,0 +1,21 @@
+extends ../layout
+block content
+    .row.justify-content-center
+        .col-12.col-md-8.col-lg-8.col-xl-6
+            form(action="/admin/register" method="post")
+                .row.align-items-center
+                    .col.mt-4
+                        input.form-control(type="text" name="name" placeholder="Name")
+                .row.align-items-center
+                    .col.mt-4
+                        input.form-control(type="email" name="email" placeholder="Email")
+                .row.align-items-center
+                    .col.mt-4
+                        input.form-control(type="password" name="password" placeholder="password")
+                .row.align-items-center
+                    .col.mt-4
+                        input.form-control(type="password" name="password2" placeholder="Confirm Password")
+                .row
+                    .col.mt-4
+                        input(type="hidden", name="_csrf" value=`${csrfToken}`)
+                        button.btn.btn-primary(type="submit") Register

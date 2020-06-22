@@ -1,0 +1,52 @@
+extends ./layout
+
+block content
+    .row.mt-4
+        .offset-md-2.col-md-6
+            if errorMessage.length > 0
+                .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= errorMessage
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+            if success.length > 0
+                .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= success
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+
+    .row
+        div(style="margin-top:7%")
+            .col-md-10
+                form.form-inline(action="/admin/registerCollege" method="POST")
+                    .d-flex.justify-content-between
+                        div(style="padding-right:100%")
+                            input.form-control(type="text" placeholder="Enter College name" name="col_name")  
+                            input(type="hidden", name="_csrf" value=`${csrfToken}`)
+                        div(style="padding-left:100%")
+                            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Create
+
+    .row.mt-2
+        if allColleges.length > 0
+            .col-md-10
+                table.table
+                    thead
+                        tr  
+                            th #
+                            th col_name
+                            th col_code
+                            th action
+                    tbody
+                        each n,i in allColleges                                 
+                            tr  
+                                td= i+1
+                                td= n.col_name
+                                td= n.col_code
+                                td
+                                    form(action="/admin/deleteCollege" method="POST")
+                                        input(type="hidden", name="_csrf" value=`${csrfToken}`)
+                                        input(type="hidden", name="col_id" value=`${n.id}`)
+                                        button(type="submit").btn.btn-danger.btn-sm delete
+
+    
+
+                                

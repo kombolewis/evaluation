@@ -1,0 +1,47 @@
+extends ./layout
+
+block content
+    .row.mt-4
+        .offset-md-2.col-md-6
+            if errorMessage.length > 0
+                .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= errorMessage
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+            if success.length > 0
+                .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                    .d-flex.justify-content-center= success
+                    button.close(type='button' data-dismiss='alert' aria-label='Close')
+                        span(aria-hidden='true') &#215;
+
+
+           
+
+    .row.mt-2
+        if allUnits.length > 0
+            .col-md-10
+                form.form-inline(action="/admin/assignUnits" method="POST")
+                    
+                    p(style="margin-right:70%") #{staff.name }
+                    input(type="hidden", name="_csrf" value=`${csrfToken}`)    
+                    input(type="hidden", name="id" value=`${staff.id}`)    
+                    button.btn.btn-outline-success.mb-2(type="submit") Assign 
+                    hr
+                    
+                    table.table
+                        thead
+                            tr  
+                                th unit_name
+                                th unit_code
+                                th check
+                        tbody
+                            each n,i in allUnits                                        
+                                tr  
+                                    td= n.unit_name
+                                    td= n.unit_code
+                                    td
+                                        - let state = client.checkState(staff,n.unit_code)
+                                        input(type="checkbox", name="selectedUnit",value=`${n.unit_code}`, checked=state)
+        
+
+                                

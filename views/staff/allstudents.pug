@@ -1,0 +1,36 @@
+extends ./layout
+block content
+    .container
+        .row.mt-4
+            .col-md-12
+                .mr-4
+                
+                    
+                    | #{unit}
+                    
+                    button.btn.btn-outline-success.mb-2(style="margin-left:80%") submit 
+                
+                    
+                    table.table
+                        thead
+                            tr  
+                                th Name
+                                th Reg No
+                                th CAT I
+                                th CAT II
+                                th Main Exam
+                        tbody
+                                each student in myStudents                              
+                                    tr  
+                                        td 
+                                            div= student.name
+                                        
+                                        td
+                                            div=  student.reg_no                   
+                                        td
+                                            div(contenteditable) enter mark here
+                                        td
+                                            div(contenteditable) enter mark here
+
+                                        td
+                                            div(contenteditable) enter mark here

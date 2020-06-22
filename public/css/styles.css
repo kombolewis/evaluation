@@ -1,0 +1,118 @@
+.btn-custom{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+   /*optional*/
+    font-family: arial, sans-serif;
+   /*input has OS specific font-family*/
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.newwrapper{
+    display: flex;
+    align-items:center;
+}
+body {
+    overflow-x: hidden;
+}
+#sidebar-wrapper {
+    min-height: 70vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+#page-content-wrapper {
+    min-width: 100vw;
+}
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+   }
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+   }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+   }
+}
+
+.modal-login {
+    width: 320px;
+}
+.modal-login .modal-content {
+    border-radius: 1px;
+    border: none;
+}
+.modal-login .modal-header {
+    position: relative;
+    justify-content: center;
+    background: #f2f2f2;
+}
+.modal-login .modal-body {
+    padding: 30px;
+}
+.modal-login .modal-footer {
+    background: #f2f2f2;
+}
+.modal-login h4 {
+    text-align: center;
+    font-size: 26px;
+}
+.modal-login label {
+    font-weight: normal;
+    font-size: 13px;
+}
+.modal-login .form-control, .modal-login .btn {
+    min-height: 38px;
+    border-radius: 2px; 
+}
+.modal-login .hint-text {
+    text-align: center;
+}
+.modal-login .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.modal-login .checkbox-inline {
+    margin-top: 12px;
+}
+.modal-login input[type="checkbox"]{
+    margin-top: 2px;
+}
+.modal-login .btn {
+    min-width: 100px;
+    background: #3498db;
+    border: none;
+    line-height: normal;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+    background: #248bd0;
+}
+.modal-login .hint-text a {
+    color: #999;
+}
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+.mySelect{
+    width:200px;
+    text-overflow: ellipsis;
+    white-space:pre-wrap;
+}
