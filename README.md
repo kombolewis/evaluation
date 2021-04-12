@@ -1,3 +1,3 @@
 # evaluation
 
-<p> A simple system illustrating a school examination system </p>
+<p> A simple system illustrating oa school examination system on Node.js </p>
