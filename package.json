@@ -21,7 +21,7 @@
     "express-session": "^1.17.1",
     "express-sessions": "^1.0.6",
     "mysql2": "^2.1.0",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "sequelize": "^5.21.12",
     "sqlite3": "^4.2.0"
   }
